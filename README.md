@@ -16,7 +16,7 @@ Project for NCSU CSC 505: Design and Analysis Of Algorithms
 
     <img src="./.assets/open_remote_window.png" width="230">
 
-4. Select `Reopen in Container` to download and/or open a Golang development container in VSCode. 
+4. Select `Reopen in Container` to download and/or open the development container in VSCode. 
 
     <img src="./.assets/remote_window.png" width="550">
 
