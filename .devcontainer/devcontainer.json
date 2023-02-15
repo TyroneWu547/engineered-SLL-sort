@@ -1,6 +1,6 @@
 {
     "name": "cpp-devcontainer",
-    "image": "mcr.microsoft.com/devcontainers/cpp:latest",
+    "image": "mcr.microsoft.com/devcontainers/cpp:ubuntu-20.04",
     "postCreateCommand": "g++ --version",
     "remoteUser": "vscode"
 }
