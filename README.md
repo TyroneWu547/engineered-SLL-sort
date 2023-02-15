@@ -1,4 +1,8 @@
-# ncsu-csc505-project1
+# 🧰 Engineered Singly Linked List Sort 
+
+Project for NCSU CSC 505: Design and Analysis Of Algorithms 
+
+--- 
 
 ## Environment Setup 💻 
 
