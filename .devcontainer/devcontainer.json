@@ -1,22 +1,17 @@
 {
     "name": "p1-devcontainer",
-	// "build": {
-	// 	"dockerfile": "./Dockerfile",
-	// 	"context": "."
-	// },
-	"image": "mcr.microsoft.com/devcontainers/anaconda",
-	"forwardPorts": [8888],
+    "image": "mcr.microsoft.com/devcontainers/anaconda",
+    "forwardPorts": [8888],
     "postStartCommand": "nohup bash -c 'jupyter notebook --ip=0.0.0.0 --port=8888 --allow-root &'",
-	"remoteUser": "vscode",
-	"customizations": {
-		"vscode": {
-			"extensions": [
-				"ms-vscode.cpptools",
-				"ms-vscode.cpptools-extension-pack",
-				"ms-vscode.cmake-tools",
-				"ms-python.python",
-				"ms-python.vscode-pylance"
-			]
-		}
-	}
+    "remoteUser": "vscode",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.cpptools",
+                "ms-vscode.cpptools-extension-pack",
+                "ms-vscode.cmake-tools",
+                "ms-python.python"
+            ]
+        }
+    }
 }
