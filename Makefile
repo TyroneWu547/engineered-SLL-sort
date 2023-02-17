@@ -1,5 +1,5 @@
-CPP=g++
-CPPFLAGS=-std=gnu++20
+CPP=clang++
+CPPFLAGS=-std=c++20
 
 BIN_DIR=./bin
 BLD_DIR=./build
