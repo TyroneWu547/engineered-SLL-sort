@@ -32,9 +32,9 @@ Modeled after the [Engineered quicksort](https://www.sciencedirect.com/science/a
 $ make [insertion|merge|quick]
 
 # output:
-# g++ -std=gnu++20 -c src/main.cpp -o ./build/main.o
-# g++ -std=gnu++20 -c src/merge.cpp -o ./build/merge.o
-# g++ -std=gnu++20 ./build/main.o ./build/merge.o -o ./bin/merge
+# clang++ -std=c++20 -c src/main.cpp -o ./build/main.o
+# clang++ -std=c++20 -c src/merge.cpp -o ./build/merge.o
+# clang++ -std=c++20 ./build/main.o ./build/merge.o -o ./bin/merge
 ```
 
 ### Running the script
