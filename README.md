@@ -1,6 +1,7 @@
 # 🧰 Engineered Singly Linked List Sort 
 
-Project for NCSU CSC 505: Design and Analysis Of Algorithms 
+Project for NCSU CSC 505: Design and Analysis Of Algorithms  
+Modeled after the [Engineered quicksort](https://www.sciencedirect.com/science/article/pii/0096055196000057) paper. 
 
 --- 
 

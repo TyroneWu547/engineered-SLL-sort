@@ -5,7 +5,7 @@ BIN_DIR=./bin
 BUILD_DIR=./build
 SRC_DIR=./src
 
-# Build Sort
+# Link
 $(BIN_DIR)/%:  $(BUILD_DIR)/main.o $(BUILD_DIR)/%.o
 	$(CPP) $(CPPFLAGS) $(BUILD_DIR)/main.o $(BUILD_DIR)/%.o -o $(BIN_DIR)/%
 
