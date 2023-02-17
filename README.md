@@ -3,7 +3,7 @@
 Project for NCSU CSC 505: Design and Analysis Of Algorithms  
 Modeled after the [Engineered quicksort](https://www.sciencedirect.com/science/article/pii/0096055196000057) paper. 
 
---- 
+---
 
 ## Environment Setup 💻 
 
@@ -25,4 +25,25 @@ Modeled after the [Engineered quicksort](https://www.sciencedirect.com/science/a
 
 ## Usage 🛠️ 
 
-todo
+### Compiling the sorting algorithm
+
+```sh
+# example: make merge
+$ make [insertion|merge|quick]
+
+# output:
+# g++ -std=gnu++20 -c src/main.cpp -o ./build/main.o
+# g++ -std=gnu++20 -c src/merge.cpp -o ./build/merge.o
+# g++ -std=gnu++20 ./build/main.o ./build/merge.o -o ./bin/merge
+```
+
+### Running the script
+
+```sh
+# Make the script executable
+$ chmod +x run_sort.sh
+
+# Execute script
+# example: `./run_sort.sh merge < ./data/input_01.txt`
+$ ./run_sort.sh [insertion|merge|quick] < [file_path]
+```
