@@ -2,7 +2,14 @@
 #include "../include/Sort.h"
 #include "../include/Time.h"
 
+using namespace std;
+
 int main() {
-    std::cout << sort(10) << std::endl;
+    int item;
+    int count = 0;
+    while (cin >> item) {
+        count++;
+    }
+    cout << sort(count) << endl;
     return 0;
 }
