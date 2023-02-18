@@ -16,9 +16,20 @@ int main() {
         (*list).append(item);
     }
 
-    // Perform inplace sort
+    // Perform benchmark on sort
+    Timer timer;
+    timer.start();
     sort(list);
+    timer.stop();
 
-    cout << "done" << endl;
+    // Print the sorted list
+    Node* cursor = (*list).head;
+    while (cursor) {
+        cout << (*cursor).data << endl;
+        cursor = cursor->next;
+    }
+
+    cout << "\nruntime     " << timer.getTotalTime() << endl;
+    cout << "comparisons " << "TODO" << endl;
     return 0;
 }

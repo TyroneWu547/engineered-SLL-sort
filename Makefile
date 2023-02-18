@@ -7,8 +7,9 @@ SRC_DIR=./src
 INC_DIR=./include
 LIB_DIR=./lib
 
-DEP=main.o LinkedList.o
-DEP_ACT=$(BLD_DIR)/main.o $(BLD_DIR)/LinkedList.o
+DEP=main.o LinkedList.o Time.o
+DEP_ACT=$(BLD_DIR)/main.o $(BLD_DIR)/LinkedList.o $(BLD_DIR)/Time.o
+
 CMD=$(CPP) $(CPPFLAGS)
 
 # Build sort executable
@@ -25,8 +26,8 @@ quick: $(DEP) quick.o
 main.o: $(SRC_DIR)/main.cpp
 	$(CMD) -c $< -o $(BLD_DIR)/$@
 
-# Compile Linked List data structure
-LinkedList.o: $(LIB_DIR)/LinkedList.cpp
+# Compile lib
+%.o: $(LIB_DIR)/%.cpp $(INC_DIR)/%.h
 	$(CMD) -c $< -o $(BLD_DIR)/$@
 
 # Compile sort

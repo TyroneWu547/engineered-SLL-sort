@@ -6,9 +6,9 @@
 #ifndef TIME_H
 #define TIME_H
 
-#include<iostream>
-#include<sys/time.h>
-#include<sys/resource.h>
+#include <iostream>
+#include <sys/time.h>
+#include <sys/resource.h>
 
 using namespace std;
 
