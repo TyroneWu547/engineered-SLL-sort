@@ -33,8 +33,9 @@ $ make [insertion|merge|quick]
 
 # output:
 # clang++ -std=c++20 -c src/main.cpp -o ./build/main.o
+# clang++ -std=c++20 -c lib/LinkedList.cpp -o ./build/LinkedList.o
 # clang++ -std=c++20 -c src/merge.cpp -o ./build/merge.o
-# clang++ -std=c++20 ./build/main.o ./build/merge.o -o ./bin/merge
+# clang++ -std=c++20 ./build/main.o ./build/LinkedList.o ./build/merge.o -o ./bin/merge
 ```
 
 ### Running the script
