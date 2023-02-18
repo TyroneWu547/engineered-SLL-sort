@@ -1,6 +1,8 @@
 #ifndef SORT_H
 #define SORT_H
 
-int sort(int head);
+#include "LinkedList.h"
+
+void sort(LinkedList* list);
 
 #endif // SORT_H

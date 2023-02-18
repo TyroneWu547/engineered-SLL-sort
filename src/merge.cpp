@@ -1,7 +1,7 @@
 #include <iostream>
 #include "../include/Sort.h"
+#include "../include/LinkedList.h"
 
-int sort(int head) {
-    std::cout << "merge" << std::endl;
-    return head;
+void sort(LinkedList* list) {
+    std::cout << "merge sort with " << (*list).size << " nodes" << std::endl;
 }

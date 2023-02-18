@@ -1,7 +1,7 @@
 #include <iostream>
 #include "../include/Sort.h"
+#include "../include/LinkedList.h"
 
-int sort(int head) {
-    std::cout << "quick" << std::endl;
-    return head;
+void sort(LinkedList* list) {
+    std::cout << "quicksort with " << (*list).size << " nodes" << std::endl;
 }
