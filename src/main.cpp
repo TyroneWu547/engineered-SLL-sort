@@ -29,7 +29,7 @@ int main() {
         cursor = cursor->next;
     }
 
-    cout << "\nruntime     " << timer.getTotalTime() << endl;
-    cout << "comparisons " << "TODO" << endl;
+    cerr << "runtime     " << timer.getTotalTime() << endl;
+    cerr << "comparisons " << "TODO" << endl;
     return 0;
 }

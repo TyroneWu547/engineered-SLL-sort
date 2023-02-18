@@ -34,8 +34,9 @@ $ make [insertion|merge|quick]
 # output:
 # clang++ -std=c++20 -c src/main.cpp -o ./build/main.o
 # clang++ -std=c++20 -c lib/LinkedList.cpp -o ./build/LinkedList.o
+# clang++ -std=c++20 -c lib/Time.cpp -o ./build/Time.o
 # clang++ -std=c++20 -c src/merge.cpp -o ./build/merge.o
-# clang++ -std=c++20 ./build/main.o ./build/LinkedList.o ./build/merge.o -o ./bin/merge
+# clang++ -std=c++20 ./build/main.o ./build/LinkedList.o ./build/Time.o ./build/merge.o -o ./bin/merge
 ```
 
 ### Running the script
@@ -47,4 +48,26 @@ $ chmod +x run_sort.sh
 # Execute script
 # example: `./run_sort.sh merge < ./data/input_01.txt`
 $ ./run_sort.sh [insertion|merge|quick] < [file_path]
+
+# full output:
+# 1
+# 2
+# ...
+# 100
+# runtime     SECONDS
+# comparisons NUMBER_OF_COMPARISONS
+```
+
+The sorted list is printed onto standard output:
+```sh
+1
+2
+...
+100
+```
+
+The statistics of the sort is printed onto standard error: 
+```sh
+runtime     SECONDS
+comparisons NUMBER_OF_COMPARISONS
 ```
