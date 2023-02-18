@@ -41,5 +41,4 @@ void sort(LinkedList* list) {
     list->head->next = nullptr;
     list->head = insertionRec(list->head, spot);
     list->tail = tail;
-    std::cout << "insertion sort with " << (*list).size << " nodes" << std::endl;
 };
