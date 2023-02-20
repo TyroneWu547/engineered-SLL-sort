@@ -13,10 +13,10 @@ DEP_ACT=$(BLD_DIR)/main.o $(BLD_DIR)/LinkedList.o $(BLD_DIR)/Time.o
 
 COMPILE=$(CPP) $(CPPFLAGS)
 
-SORT_100=< $(DAT_DIR)/n-100/input_b-100_s-1.txt 1> $(DAT_DIR)/n-100/output_b-100_s-1.txt
-SORT_10000=< $(DAT_DIR)/n-10000/input_b-10000_s-1.txt 1> $(DAT_DIR)/n-10000/output_b-10000_s-1.txt
-TEST_100=diff --strip-trailing-cr $(DAT_DIR)/n-100/expected.txt $(DAT_DIR)/n-100/output_b-100_s-1.txt
-TEST_10000=diff --strip-trailing-cr $(DAT_DIR)/n-10000/expected.txt $(DAT_DIR)/n-10000/output_b-10000_s-1.txt
+SORT_100=< $(DAT_DIR)/n-100/input_s-1.txt 1> $(DAT_DIR)/n-100/output_s-1.txt
+SORT_10000=< $(DAT_DIR)/n-10000/input_s-1.txt 1> $(DAT_DIR)/n-10000/output_s-1.txt
+TEST_100=diff --strip-trailing-cr $(DAT_DIR)/n-100/expected.txt $(DAT_DIR)/n-100/output_s-1.txt
+TEST_10000=diff --strip-trailing-cr $(DAT_DIR)/n-10000/expected.txt $(DAT_DIR)/n-10000/output_s-1.txt
 
 # Build sort executable
 insertion: $(DEP) insertion.o
