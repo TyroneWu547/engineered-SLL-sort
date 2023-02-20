@@ -20,24 +20,30 @@ TEST_10000=diff --strip-trailing-cr $(DAT_DIR)/n-10000/expected.txt $(DAT_DIR)/n
 
 # Build sort executable
 insertion: $(DEP) insertion.o
+	@mkdir -p $(BIN_DIR)
 	$(COMPILE) $(DEP_ACT) $(BLD_DIR)/insertion.o -o $(BIN_DIR)/insertion
 
 merge: $(DEP) merge.o
+	@mkdir -p $(BIN_DIR)
 	$(COMPILE) $(DEP_ACT) $(BLD_DIR)/merge.o -o $(BIN_DIR)/merge
 
 quick: $(DEP) quick.o
+	@mkdir -p $(BIN_DIR)
 	$(COMPILE) $(DEP_ACT) $(BLD_DIR)/quick.o -o $(BIN_DIR)/quick
 
 # Compile main
 main.o: $(SRC_DIR)/main.cpp
+	@mkdir -p $(BLD_DIR)
 	$(COMPILE) -c $< -o $(BLD_DIR)/$@
 
 # Compile lib
 %.o: $(LIB_DIR)/%.cpp $(INC_DIR)/%.h
+	@mkdir -p $(BLD_DIR)
 	$(COMPILE) -c $< -o $(BLD_DIR)/$@
 
 # Compile sort
 %.o: $(SRC_DIR)/%.cpp $(INC_DIR)/Sort.h
+	@mkdir -p $(BLD_DIR)
 	$(COMPILE) -c $< -o $(BLD_DIR)/$@
 
 # Test insertion
