@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function error_exit() {
-    echo "error - $1"
+    echo "error: $1"
     echo 
     echo "usage:   ./run_sort.sh [insertion|merge|quick] < [file_path]"
     echo
@@ -27,7 +27,9 @@ then
     error_exit "Invalid first arg: $1"
 elif [ ! -e "./bin/$1" ]
 then
-    error_exit "Executable file does not exist: ./bin/$1"
+    # error_exit "executable file ./bin/$1 does not exist."
+    echo "Generating the executable file: $1"
+    make "$1"
 fi
 
 # Executing sorting algorithm
