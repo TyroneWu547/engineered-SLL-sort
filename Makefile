@@ -31,50 +31,39 @@ quick: $(DEP) quick.o
 	@mkdir -p $(BIN_DIR)
 	$(COMPILE) $(DEP_ACT) $(BLD_DIR)/quick.o -o $(BIN_DIR)/quick
 
-# Compile main
-main.o: $(SRC_DIR)/main.cpp
-	@mkdir -p $(BLD_DIR)
-	$(COMPILE) -c $< -o $(BLD_DIR)/$@
-
 # Compile lib
 %.o: $(LIB_DIR)/%.cpp $(INC_DIR)/%.h
 	@mkdir -p $(BLD_DIR)
 	$(COMPILE) -c $< -o $(BLD_DIR)/$@
 
-# Compile sort
+# Compile src
 %.o: $(SRC_DIR)/%.cpp $(INC_DIR)/Sort.h
 	@mkdir -p $(BLD_DIR)
 	$(COMPILE) -c $< -o $(BLD_DIR)/$@
 
+# Generate sample input
+generate-input:
+	@sed -i -e 's/\r$$//' ./scripts/generate_data.sh
+	@chmod +x ./scripts/generate_data.sh
+	./scripts/generate_data.sh
+
 # Test insertion
 test-insertion:
-	@echo "Running insertion sort with n = 100:"
-	./run_sort.sh insertion $(SORT_100)
-	$(TEST_100)
-
-	@echo "\nRunning insertion sort with n = 10000:"
-	./run_sort.sh insertion $(SORT_10000)
-	$(TEST_10000)
+	@sed -i -e 's/\r$$//' ./scripts/test_sort.sh
+	@chmod +x ./scripts/test_sort.sh
+	./scripts/test_sort.sh insertion
 
 # Test merge
 test-merge:
-	@echo "Running merge sort with n = 100:"
-	./run_sort.sh merge $(SORT_100)
-	$(TEST_100)
-
-	@echo "\nRunning merge sort with n = 10000:"
-	./run_sort.sh merge $(SORT_10000)
-	$(TEST_10000)
+	@sed -i -e 's/\r$$//' ./scripts/test_sort.sh
+	@chmod +x ./scripts/test_sort.sh
+	./scripts/test_sort.sh merge
 
 # Test quick
 test-quick:
-	@echo "Running quick sort with n = 100:"
-	./run_sort.sh quick $(SORT_100)
-	$(TEST_100)
-
-	@echo "\nRunning quick sort with n = 10000:"
-	./run_sort.sh quick $(SORT_10000)
-	$(TEST_10000)
+	@sed -i -e 's/\r$$//' ./scripts/test_sort.sh
+	@chmod +x ./scripts/test_sort.sh
+	./scripts/test_sort.sh quick
 
 # Clean build
 clean:
