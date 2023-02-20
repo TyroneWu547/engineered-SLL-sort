@@ -25,7 +25,7 @@ Modeled after the [Engineered quicksort](https://www.sciencedirect.com/science/a
 
 ## Usage 🛠️ 
 
-### Compiling the sorting algorithm
+### Compiling the program
 
 ```sh
 # example: make merge
@@ -67,7 +67,7 @@ $ ./run_sort.sh [insertion|merge|quick] < [file_path]
 
 For filtered output: 
 ```sh
-# Discard standard error
+# Sorted input is printed onto standard output
 $ ./run_sort.sh merge < ./data/input_01.txt 2> /dev/null
 # output:
 # 1
@@ -75,46 +75,41 @@ $ ./run_sort.sh merge < ./data/input_01.txt 2> /dev/null
 # ...
 # 100
 
-# Discard standard output
+# Benchmark is printed onto standard error
 $ ./run_sort.sh merge < ./data/input_01.txt 1> /dev/null
-# output:
-# runtime     SECONDS
-# comparisons NUMBER_OF_COMPARISONS
-
-# ---
-
-# Pipe stdout and stderr to separate files
-$ ./run_sort.sh merge < ./data/input_01.txt 1> sorted_list.txt 2> benchmark.txt
-
-$ cat sorted_list.txt
-# output:
-# 1
-# 2
-# ...
-# 100
-
-$ cat benchmark.txt
 # output:
 # runtime     SECONDS
 # comparisons NUMBER_OF_COMPARISONS
 ```
 
-Running test cases: 
+### Run test cases
+
 ```sh
-# Note: make sure to compile and build the program first :)
-# Run test cases 
+# example: make test-insertion
 $ make [test-insertion|test-merge|test-quick]
 
 # output:
-# Running insertion sort with n = 100:
-# ./run_sort.sh insertion < ./data/n-100/input_b-100_s-1.txt 1> ./data/n-100/output_b-100_s-1.txt
-# runtime     1.7e-05
+# ...
+# Running insertion sort with b = 100:
+# runtime     1.5e-05
 # comparisons TODO
-# diff --strip-trailing-cr ./data/n-100/expected.txt ./data/n-100/output_b-100_s-1.txt
+# Test case b = 100 passed. :)
 
-# Running insertion sort with n = 10000:
-# ./run_sort.sh insertion < ./data/n-10000/input_b-10000_s-1.txt 1> ./data/n-10000/output_b-10000_s-1.txt
-# runtime     0.235129
+# Running insertion sort with b = 10000:
+# runtime     0.231602
 # comparisons TODO
-# diff --strip-trailing-cr ./data/n-10000/expected.txt ./data/n-10000/output_b-10000_s-1.txt
+# Test case b = 10000 passed. :)
+```
+
+### Generate input data
+
+Generate unsorted input data on 5 fixed seeds for each input of size n: 
+```sh
+$ make generate-input
+
+# output:
+# ./scripts/generate_data.sh
+# generating ./data/n-100/input_s-1.txt
+# ...
+# generating ./data/n-100000/input_s-611.txt
 ```
