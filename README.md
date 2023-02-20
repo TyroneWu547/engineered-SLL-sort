@@ -41,10 +41,17 @@ $ make [insertion|merge|quick]
 
 ### Running the script
 
+Before execution: 
 ```sh
+# May need to convert Windows line ending to Unix
+$ sed -i -e 's/\r$//' run_sort.sh
+
 # Make the script executable
 $ chmod +x run_sort.sh
+```
 
+Script execution: 
+```sh
 # Execute script
 # example: `./run_sort.sh merge < ./data/input_01.txt`
 $ ./run_sort.sh [insertion|merge|quick] < [file_path]
@@ -58,16 +65,56 @@ $ ./run_sort.sh [insertion|merge|quick] < [file_path]
 # comparisons NUMBER_OF_COMPARISONS
 ```
 
-The sorted list is printed onto standard output:
+For filtered output: 
 ```sh
-1
-2
-...
-100
+# Discard standard error
+$ ./run_sort.sh merge < ./data/input_01.txt 2> /dev/null
+# output:
+# 1
+# 2
+# ...
+# 100
+
+# Discard standard output
+$ ./run_sort.sh merge < ./data/input_01.txt 1> /dev/null
+# output:
+# runtime     SECONDS
+# comparisons NUMBER_OF_COMPARISONS
+
+# ---
+
+# Pipe stdout and stderr to separate files
+$ ./run_sort.sh merge < ./data/input_01.txt 1> sorted_list.txt 2> benchmark.txt
+
+$ cat sorted_list.txt
+# output:
+# 1
+# 2
+# ...
+# 100
+
+$ cat benchmark.txt
+# output:
+# runtime     SECONDS
+# comparisons NUMBER_OF_COMPARISONS
 ```
 
-The statistics of the sort is printed onto standard error: 
+Running test cases: 
 ```sh
-runtime     SECONDS
-comparisons NUMBER_OF_COMPARISONS
+# Note: make sure to compile and build the program first :)
+# Run test cases 
+$ make [test-insertion|test-merge|test-quick]
+
+# output:
+# Running insertion sort with n = 100:
+# ./run_sort.sh insertion < ./data/n-100/input_b-100_s-1.txt 1> ./data/n-100/output_b-100_s-1.txt
+# runtime     1.7e-05
+# comparisons TODO
+# diff --strip-trailing-cr ./data/n-100/expected.txt ./data/n-100/output_b-100_s-1.txt
+
+# Running insertion sort with n = 10000:
+# ./run_sort.sh insertion < ./data/n-10000/input_b-10000_s-1.txt 1> ./data/n-10000/output_b-10000_s-1.txt
+# runtime     0.235129
+# comparisons TODO
+# diff --strip-trailing-cr ./data/n-10000/expected.txt ./data/n-10000/output_b-10000_s-1.txt
 ```
