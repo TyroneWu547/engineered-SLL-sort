@@ -1,5 +1,4 @@
 nohup.out
 build/
 bin/
-data/*
-!data/n-1000000/
+data/
