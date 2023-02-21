@@ -14,6 +14,9 @@
 
 using namespace std;
 
+/** Global counter for number of comparison operators performed. */
+unsigned long long compares;
+
 /**
  * @brief Parse cin into a Linked List and performs sort + benchmark
  * 
@@ -27,6 +30,8 @@ int main() {
     while (cin >> item) {
         list->append(item);
     }
+    // Initialize comparison counter
+    compares = 0;
 
     // Perform benchmark on the sort
     Timer timer;
@@ -43,6 +48,6 @@ int main() {
 
     // Print the benchmark to standard error
     cerr << "runtime     " << timer.getTotalTime() << endl;
-    cerr << "comparisons " << "TODO" << endl;
+    cerr << "comparisons " << compares << endl;
     return 0;
 }

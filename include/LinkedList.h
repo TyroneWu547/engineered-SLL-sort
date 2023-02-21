@@ -10,6 +10,7 @@
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
 
+#include <iostream>
 #include <stdlib.h>
 
 /**
@@ -18,6 +19,7 @@
  */
 class Node {
 public:
+
     /** The data to hold. */
     int data;
     /** Pointer to the next node in sequence. */
@@ -32,6 +34,80 @@ public:
         this->data = data;
         this->next = NULL;
     }
+
+    /**
+     * @brief Defines == operator for comparing nodes.
+     * 
+     * @param other the other node to compare to
+     * @return true if both nodes data are equal
+     * @return false if both nodes data are not equal
+     */
+    bool operator == (const Node& other) const;
+
+    /**
+     * @brief Defines < operator for comparing nodes.
+     * 
+     * @param other the other node to compare to
+     * @return true if this node's data is less than other node's data
+     * @return false if this node's data is not less than other node's data
+     */
+    bool operator < (const Node& other) const;
+
+    /**
+     * @brief Defines != operator for comparing nodes. (derives from !operator==)
+     * 
+     * @param other the other node to compare to
+     * @return true if both nodes data are not equal
+     * @return false if both nodes data are equal
+     */
+    bool operator != (const Node& other) const;
+
+    /**
+     * @brief Defines <= operator for comparing nodes. (derives from operator< || operator==)
+     * 
+     * @param other the other node to compare to
+     * @return true if this node's data is less than or equal to other node's data
+     * @return false if this node's data is not less than or equal to other node's data
+     */
+    bool operator <= (const Node& other) const;
+
+    /**
+     * @brief Defines > operator for comparing nodes. (derives from !operator< && !operator==)
+     * 
+     * @param other the other node to compare to
+     * @return true if this node's data is greater than other node's data
+     * @return false if this node's data is not greater than other node's data
+     */
+    bool operator > (const Node& other) const;
+
+    /**
+     * @brief Defines >= operator for comparing nodes. (derives from !operator<)
+     * 
+     * @param other the other node to compare to
+     * @return true if this node's data is greater than or equal to other node's data
+     * @return false if this node's data is not greater than or equal to other node's data
+     */
+    bool operator >= (const Node& other) const;
+
+    // /**
+    //  * @brief Defines if this node is NULL or not.
+    //  * 
+    //  * @return true if this node is NULL
+    //  * @return false if this node is not NULL
+    //  */
+    // bool operator == (std::nullptr_t) {
+    //     return *this == nullptr;
+    // }
+
+    // /**
+    //  * @brief Defines if this node is NULL or not.
+    //  * 
+    //  * @return true if this node is not NULL
+    //  * @return false if this node is NULL
+    //  */
+    // bool operator != (std::nullptr_t) {
+    //     return !(*this == nullptr);
+    // }
 };
 
 /**
