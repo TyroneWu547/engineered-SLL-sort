@@ -1,4 +1,4 @@
 nohup.out
 build/
 bin/
-data/**/output_*.txt
+data/
