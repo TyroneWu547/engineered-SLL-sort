@@ -5,7 +5,7 @@
 //This method inserts a node into the sorted portion of the array
 void insertedIntoSorted(LinkedList* list, Node* pointToSort){
     Node* sortedItr = list->head;
-    if (pointToSort->data <= list->head->data){
+    if (*pointToSort <= *(list->head)){
         pointToSort->next = list->head;
         list->head = pointToSort;
     } else {
@@ -15,7 +15,7 @@ void insertedIntoSorted(LinkedList* list, Node* pointToSort){
                 sortedItr->next = pointToSort;
                 list->tail = pointToSort;
                 break;
-            } else if(pointToSort->data <= sortedItr->next->data){
+            } else if(*pointToSort <= *(sortedItr->next)){
                 pointToSort->next = sortedItr->next;
                 sortedItr->next = pointToSort;
                 break;

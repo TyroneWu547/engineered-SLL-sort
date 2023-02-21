@@ -1,78 +1,90 @@
+/**
+ * @file merge.cpp
+ * @author your name (you@domain.com)
+ * @brief 
+ * 
+ */
+
 #include <iostream>
 #include "../include/Sort.h"
 #include "../include/LinkedList.h"
 
-Node* split(Node* list, Node* refFront, Node* refBack)
-{
-    Node* fast;
-    Node* slow;
-    slow = list;
-    fast = list->next;
+void split(Node* head, Node** leftHead, Node** rightHead) {
+    Node* fast = head;
+    Node* slow = head;
 
-    while(fast != NULL)
-    {
+    while (fast->next != nullptr) {
         fast = fast->next;
-        if (fast != NULL) {
+        if (fast->next != nullptr) {
             slow = slow->next;
             fast = fast->next;
         }
     }
-    
-    refFront = list;
-    refBack = slow->next;
-    slow->next = NULL;
-    return refFront, refBack;
+
+    *leftHead = head;
+    *rightHead = slow->next;
+    slow->next = nullptr;
 }
 
-Node* merge(Node* listA, Node* listB)
-{
-    Node* ret = NULL;
-
-    // Base cases
-    if (listA == NULL)
-    {
-        return listB;
-    }
-    else if (listB == NULL)
-    {
-        return listA;
+Node* merge(Node* leftHead, Node* rightHead) {
+    // Return the left or right if the opposite split is empty
+    if (leftHead == nullptr) {
+        return rightHead;
+    } else if (rightHead == nullptr) {
+        return leftHead;
     }
 
-    if (listA->data <= listB->data)
-    {
-        ret = listA;
-        ret->next = merge(listA->next, listB);
+    Node* leftCursor = leftHead;
+    Node* rightCursor = rightHead;
+    Node* cursor;
+    if (*leftCursor <= *rightCursor) {
+        cursor = leftCursor;
+        leftCursor = leftCursor->next;
+    } else {
+        cursor = rightCursor;
+        rightCursor = rightCursor->next;
     }
-    else
-    {
-        ret = listB;
-        ret->next = merge(listA, listB->next);
+    Node* newHead = cursor;
+
+    while (leftCursor != nullptr && rightCursor != nullptr) {
+        if (*leftCursor <= *rightCursor) {
+            cursor->next = leftCursor;
+            leftCursor = leftCursor->next;
+        } else {
+            cursor->next = rightCursor;
+            rightCursor = rightCursor->next;
+        }
+        cursor = cursor->next;
     }
 
-    return ret;
+    if (leftCursor == nullptr) {
+        cursor->next = rightCursor;
+    } else {
+        cursor->next = leftCursor;
+    }
+
+    return newHead;
 }
 
-void sort(LinkedList* list) {
-    Node* front = list->head;
-    std::cout << front->data << " " << front->next->data << std::endl;
-    LinkedList* x;
-    LinkedList* y;
-
+Node* mergeSort(Node* head) {
     // Base case
-    if ((front == NULL) || (front->next == NULL))
-    {
-        return;
+    if ((head == nullptr) || (head->next == nullptr)) {
+        return head;
     }
 
     // Split into sublists
-    x->head, y->head = split(front, x->head, y->head);
+    Node* leftHead;
+    Node* rightHead;
+    split(head, &leftHead, &rightHead);
 
-    std::cout << x->head->data << std::endl;
-
-    //Recurse
-    sort(x);
-    sort(y);
+    // Recursively split the linked list in half
+    leftHead = mergeSort(leftHead);
+    rightHead = mergeSort(rightHead);
 
     // Merge the lists together
-    list->head = merge(x->head, y->head);
+    return merge(leftHead, rightHead);
+}
+
+void sort(LinkedList* list) {
+    list->head = mergeSort(list->head);
 }

@@ -112,7 +112,7 @@ bool Node::operator >= (const Node& other) const {
 }
 
 /**
- * @brief Append the new node to the end of the SLL.
+ * @brief Append the new node to the front of the SLL.
  * 
  * @param data the data of the new node
  */
@@ -126,11 +126,8 @@ void LinkedList::append(int data) {
         this->head = node;
     } else {
         // otherwise, append node to tail
-        this->tail->next = node;
+        pushHead(node);
     }
-
-    // Set new tail of the linked list
-    this->tail = node;
 }
 
 /**
