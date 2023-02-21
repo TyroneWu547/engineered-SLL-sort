@@ -2,7 +2,7 @@
 #include "../include/Sort.h"
 #include "../include/LinkedList.h"
 
-void split(Node* list, Node** refFront, Node** refBack)
+Node* split(Node* list, Node* refFront, Node* refBack)
 {
     Node* fast;
     Node* slow;
@@ -17,10 +17,11 @@ void split(Node* list, Node** refFront, Node** refBack)
             fast = fast->next;
         }
     }
-
-    *refFront = list;
-    *refBack = slow->next;
+    
+    refFront = list;
+    refBack = slow->next;
     slow->next = NULL;
+    return refFront, refBack;
 }
 
 Node* merge(Node* listA, Node* listB)
@@ -64,7 +65,9 @@ void sort(LinkedList* list) {
     }
 
     // Split into sublists
-    split(front, &x->head, &y->head);
+    x->head, y->head = split(front, x->head, y->head);
+
+    std::cout << x->head->data << std::endl;
 
     //Recurse
     sort(x);
