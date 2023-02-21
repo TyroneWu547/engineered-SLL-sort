@@ -2,40 +2,43 @@
 #include "../include/Sort.h"
 #include "../include/LinkedList.h"
 
-using namespace std;
-Node* tail;
-Node* spot;
-Node* nextSpot;
-
-//This recursive method inserts a node into the sorted portion of the list
-Node* insert(Node* h, Node* spot){
-    if(spot->data <= h->data){
-        spot->next = h;
-        return spot;
-    } else if (h->next == nullptr) {
-        spot->next = nullptr;
-        h->next = spot;
-        tail = spot;
-        return h;
+//This method inserts a node into the sorted portion of the array
+void insertedIntoSorted(LinkedList* list, Node* pointToSort){
+    Node* sortedItr = list->head;
+    if (pointToSort->data <= list->head->data){
+        pointToSort->next = list->head;
+        list->head = pointToSort;
+    } else {
+        do{
+            if(sortedItr->next == nullptr){
+                pointToSort->next = sortedItr->next;
+                sortedItr->next = pointToSort;
+                list->tail = pointToSort;
+                break;
+            } else if(pointToSort->data <= sortedItr->next->data){
+                pointToSort->next = sortedItr->next;
+                sortedItr->next = pointToSort;
+                break;
+            }
+            sortedItr = sortedItr->next; 
+        } while (sortedItr != nullptr);
     }
-    h->next = insert(h->next, spot);
-    return h;
+}
+
+//This method iterates through the unsorted portion of the list and calls insertedIntoSorted to add each to the sorted portion of the list
+void insertionSort(LinkedList* list) {
+    Node* pointToSort = list->head->next;
+    Node* nextPointToSort;
+    list->head->next = nullptr;
+    while (pointToSort != nullptr) {
+        nextPointToSort = pointToSort->next;
+        insertedIntoSorted(list, pointToSort);
+        pointToSort = nextPointToSort;
+    }
+    return;
 };
 
-//This method iterates through the unsorted portion of the list
-Node* insertionRec(Node* h) {
-    spot = h->next;
-    h->next = nullptr;
-    while (spot != nullptr) {
-        nextSpot = spot->next;
-        h = insert(h, spot);
-        spot = nextSpot;
-    }
-    return h;
-};
-
-//Runs through the method to run insertion sort on the list and then allocates the head and tail afterwards
+//This runs the insertion function, updates the the list with the new node values, and outputs the sorted list
 void sort(LinkedList* list) {
-    list->head = insertionRec(list->head);
-    list->tail = tail;
+    insertionSort(list);
 };
