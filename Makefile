@@ -14,15 +14,15 @@ DEP_ACT=$(BLD_DIR)/main.o $(BLD_DIR)/LinkedList.o $(BLD_DIR)/Time.o
 COMPILE=$(CPP) $(CPPFLAGS)
 
 # Build sort executable
-insertion: $(DEP) insertion.o
+insertion: $(DEP) insertion.o prep-script
 	@mkdir -p $(BIN_DIR)
 	$(COMPILE) $(DEP_ACT) $(BLD_DIR)/insertion.o -o $(BIN_DIR)/insertion
 
-merge: $(DEP) merge.o
+merge: $(DEP) merge.o prep-script
 	@mkdir -p $(BIN_DIR)
 	$(COMPILE) $(DEP_ACT) $(BLD_DIR)/merge.o -o $(BIN_DIR)/merge
 
-quick: $(DEP) quick.o
+quick: $(DEP) quick.o prep-script
 	@mkdir -p $(BIN_DIR)
 	$(COMPILE) $(DEP_ACT) $(BLD_DIR)/quick.o -o $(BIN_DIR)/quick
 
@@ -43,22 +43,27 @@ generate-input:
 	./scripts/generate_data.sh
 
 # Test insertion
-test-insertion:
+test-insertion: prep-script
 	@sed -i -e 's/\r$$//' ./scripts/test_sort.sh
 	@chmod +x ./scripts/test_sort.sh
 	./scripts/test_sort.sh insertion
 
 # Test merge
-test-merge:
+test-merge: prep-script
 	@sed -i -e 's/\r$$//' ./scripts/test_sort.sh
 	@chmod +x ./scripts/test_sort.sh
 	./scripts/test_sort.sh merge
 
 # Test quick
-test-quick:
+test-quick: prep-script
 	@sed -i -e 's/\r$$//' ./scripts/test_sort.sh
 	@chmod +x ./scripts/test_sort.sh
 	./scripts/test_sort.sh quick
+
+# Removes carriage return and makes script executable
+prep-script:
+	@sed -i -e 's/\r$$//' ./run_sort.sh
+	@chmod +x ./run_sort.sh
 
 # Clean build
 clean:
