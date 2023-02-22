@@ -18,6 +18,10 @@ insertion: $(DEP) insertion.o prep-script
 	@mkdir -p $(BIN_DIR)
 	$(COMPILE) $(DEP_ACT) $(BLD_DIR)/insertion.o -o $(BIN_DIR)/insertion
 
+engineered: $(DEP) engineered.o prep-script
+	@mkdir -p $(BIN_DIR)
+	$(COMPILE) $(DEP_ACT) $(BLD_DIR)/engineered.o -o $(BIN_DIR)/engineered
+
 merge: $(DEP) merge.o prep-script
 	@mkdir -p $(BIN_DIR)
 	$(COMPILE) $(DEP_ACT) $(BLD_DIR)/merge.o -o $(BIN_DIR)/merge
