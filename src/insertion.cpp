@@ -57,11 +57,16 @@ void insertIntoSorted(LinkedList* list, Node* nodeToSort) {
 }
 
 /**
- * @brief Iterates through the unsorted portion of the list and calls insertedIntoSorted to add each to the sorted portion of the list.
+ * @brief Iterates through the unsorted portion of the list and calls insertIntoSorted to add each to the sorted portion of the list.
  * 
  * @param list the list perform insertion sort on
  */
 void insertionSort(LinkedList* list) {
+    // Base case case if list is empty
+    if (list->head == nullptr) {
+        return;
+    }
+
     // Extract the node to sort
     Node* nodeToSort = list->head->next;
     list->head->next = nullptr;
