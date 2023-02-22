@@ -128,8 +128,9 @@ Node* quick(Node* head, Node* pivot) {
  * @brief Runs the quick function to perform in-place quicksort.
  * 
  * @param list the list to sort
+ * @param k value is not used
  */
-void sort(LinkedList* list) {
+void sort(LinkedList* list, int k) {
     // Base case if list empty
     if (list->head == nullptr) {
         return;

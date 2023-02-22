@@ -124,7 +124,8 @@ Node* mergeSort(Node* head) {
  * @brief Runs the merge sort function to perform in-place merge sort.
  * 
  * @param list the list to sort
+ * @param k value is not used
  */
-void sort(LinkedList* list) {
+void sort(LinkedList* list, int k) {
     list->head = mergeSort(list->head);
 }

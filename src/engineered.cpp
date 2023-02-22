@@ -165,11 +165,11 @@ Node* merge(Node* leftHead, Node* rightHead) {
 }
 
 /**
- * @brief Performs recursive merge sort on the list until all nodes are merged. 
+ * @brief Performs recursive merge sort until counter is 0, then switch to insertion sort on the leaves of the recursive calls. 
  * 
  * @param head the head of the list to merge sort on
  * @param counter keeps track of when to switch to insertion sort
- * @return Node* the head of the sorted and merged list
+ * @return Node* the head of the sorted list
  */
 Node* engineeredSort(Node* head, int counter) {
     // Base case if list is empty or contains one node
@@ -177,9 +177,8 @@ Node* engineeredSort(Node* head, int counter) {
         return head;
     }
 
-    //Recursievly split and merge if the list size is > k
+    // Recursievly split and merge if the list size is > k
     if(counter > 0){
-        
         // Split into left and right sub-lists
         Node* leftHead;
         Node* rightHead;
@@ -192,18 +191,19 @@ Node* engineeredSort(Node* head, int counter) {
         // Merge the left and right sub-lists in sorted order
         return merge(leftHead, rightHead);
 
-    //Otherwise just run insertion sort and return that
+    // Otherwise just run insertion sort and return that
     } else {
         return insertionSort(head);
     }
 }
 
 /**
- * @brief Runs the quick function to perform in-place quicksort.
+ * @brief Runs the engineeredSort function, which uses a a hybrid of merge sort and inseriton sort. 
+ *        The number of times to execute merge sort is pre-computing, and insertion sort is executed on the leaves of the recursive calls. 
  * 
  * @param list the list to sort
+ * @param k the block size of when to switch to insertion sort
  */
-void sort(LinkedList* list) {
-    int k = 8;
-    list->head = engineeredSort(list->head, ceil(log2(((double)list->size)/k)));
+void sort(LinkedList* list, int k) {
+    list->head = engineeredSort(list->head, ceil(log2(((double)list->size) / k)));
 }

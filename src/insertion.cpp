@@ -87,7 +87,8 @@ void insertionSort(LinkedList* list) {
  * @brief Runs the insertion sort function to perform in-place insertion sort.
  * 
  * @param list the list to sort
+ * @param k value is not used
  */
-void sort(LinkedList* list) {
+void sort(LinkedList* list, int k) {
     insertionSort(list);
 }
