@@ -2,7 +2,7 @@
 
 GEN_CMD=python3\ ./lib/random_permutation.py
 DATA_DIR=./data
-SIZES=( 100 100000 )
+SIZES=( 100 150000 )
 
 if [ ! -e "./bin/$1" ]
 then
@@ -31,6 +31,6 @@ do
         echo "Test case b = $size failed. ❌ :("
         exit 1
     fi
-	
-	echo "Test case b = $size passed. ✅ :)"
+
+    echo "Test case b = $size passed. ✅ :)"
 done

@@ -1,4 +1,5 @@
 nohup.out
 build/
 bin/
-data/
+data/*
+!data/experiment*/
