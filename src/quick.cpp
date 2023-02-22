@@ -89,22 +89,22 @@ Node* quick(Node* head, Node* pivot) {
         Node* middle = nullptr;
 
         // Move nodes < pivot to left, nodes > pivot to right, and nodes == pivot to middle
-        Node* tail = head;
+        Node* tmp = head;
         Node* hold;
         do {
-            hold = tail->next;
-            if (*tail < *pivot) {
-                tail->next = left;
-                left = tail;
-            } else if (*tail > *pivot) {
-                tail->next = right;
-                right = tail;
+            hold = tmp->next;
+            if (*tmp < *pivot) {
+                tmp->next = left;
+                left = tmp;
+            } else if (*tmp > *pivot) {
+                tmp->next = right;
+                right = tmp;
             } else {
-                tail->next = middle;
-                middle = tail;   
+                tmp->next = middle;
+                middle = tmp;   
             } 
-            tail = hold;
-        } while (tail != nullptr);
+            tmp = hold;
+        } while (tmp != nullptr);
 
         // If left is not empty, recursive quicksort on left sub-list
         if (left != nullptr)

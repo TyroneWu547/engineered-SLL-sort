@@ -101,6 +101,8 @@ public:
     Node* head;
     /** Pointer to the tail Node of the SLL. */
     Node* tail;
+    /** Number of nodes in the list. */
+    int size;
 
     /**
      * @brief Construct a new Linked List object with the following head and tail.

@@ -119,6 +119,7 @@ bool Node::operator >= (const Node& other) const {
 void LinkedList::append(int data) {
     // Create new node with the data
     Node* node = new Node(data);
+    size++;
 
     // If linked list is empty
     if (this->head == nullptr) {
@@ -126,7 +127,7 @@ void LinkedList::append(int data) {
         this->head = node;
         this->tail = node;
     } else {
-        // otherwise, append node to tail
+        // otherwise, append node to head
         pushHead(node);
     }
 }
