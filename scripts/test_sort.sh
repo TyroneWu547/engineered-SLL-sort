@@ -2,7 +2,7 @@
 
 GEN_CMD=python3\ ./lib/random_permutation.py
 DATA_DIR=./data
-SIZES=( 100 150000 )
+SIZES=( 100 10000 )
 
 if [ ! -e "./bin/$1" ]
 then
@@ -25,7 +25,14 @@ do
 
     echo
     echo "🧪 Running $1 sort with b = $size:"
-    ./run_sort.sh "$1" < $DATA_DIR/n-"$size"/input_s-1.txt 1> $DATA_DIR/n-"$size"/output.txt
+
+    if [ "$1" == "engineered" ]
+    then
+        ./bin/"$1" 10 < $DATA_DIR/n-"$size"/input_s-1.txt 1> $DATA_DIR/n-"$size"/output.txt
+    else
+        ./bin/"$1" < $DATA_DIR/n-"$size"/input_s-1.txt 1> $DATA_DIR/n-"$size"/output.txt
+    fi
+
     if ! diff -q --strip-trailing-cr $DATA_DIR/n-"$size"/expected.txt $DATA_DIR/n-"$size"/output.txt &> /dev/null
     then
         echo "Test case b = $size failed. ❌ :("

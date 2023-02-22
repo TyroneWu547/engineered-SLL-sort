@@ -10,6 +10,7 @@ DAT_DIR=./data
 
 DEP=main.o LinkedList.o Time.o
 DEP_ACT=$(BLD_DIR)/main.o $(BLD_DIR)/LinkedList.o $(BLD_DIR)/Time.o
+HEADERS=$(INC_DIR)/Sort.h $(INC_DIR)/LinkedList.h $(INC_DIR)/Time.h
 
 COMPILE=$(CPP) $(CPPFLAGS)
 
@@ -17,10 +18,6 @@ COMPILE=$(CPP) $(CPPFLAGS)
 insertion: $(DEP) insertion.o prep-script
 	@mkdir -p $(BIN_DIR)
 	$(COMPILE) $(DEP_ACT) $(BLD_DIR)/insertion.o -o $(BIN_DIR)/insertion
-
-engineered: $(DEP) engineered.o prep-script
-	@mkdir -p $(BIN_DIR)
-	$(COMPILE) $(DEP_ACT) $(BLD_DIR)/engineered.o -o $(BIN_DIR)/engineered
 
 merge: $(DEP) merge.o prep-script
 	@mkdir -p $(BIN_DIR)
@@ -30,33 +27,25 @@ quick: $(DEP) quick.o prep-script
 	@mkdir -p $(BIN_DIR)
 	$(COMPILE) $(DEP_ACT) $(BLD_DIR)/quick.o -o $(BIN_DIR)/quick
 
+engineered: $(DEP) engineered.o prep-script
+	@mkdir -p $(BIN_DIR)
+	$(COMPILE) $(DEP_ACT) $(BLD_DIR)/engineered.o -o $(BIN_DIR)/engineered
+
 # Compile lib
-%.o: $(LIB_DIR)/%.cpp $(INC_DIR)/%.h
+%.o: $(LIB_DIR)/%.cpp $(HEADERS)
 	@mkdir -p $(BLD_DIR)
 	$(COMPILE) -c $< -o $(BLD_DIR)/$@
 
 # Compile src
-%.o: $(SRC_DIR)/%.cpp $(INC_DIR)/Sort.h
+%.o: $(SRC_DIR)/%.cpp $(HEADERS)
 	@mkdir -p $(BLD_DIR)
 	$(COMPILE) -c $< -o $(BLD_DIR)/$@
-
-# Generate sample input
-generate-input:
-	@sed -i -e 's/\r$$//' ./scripts/generate_data.sh
-	@chmod +x ./scripts/generate_data.sh
-	./scripts/generate_data.sh
 
 # Test insertion
 test-insertion: prep-script
 	@sed -i -e 's/\r$$//' ./scripts/test_sort.sh
 	@chmod +x ./scripts/test_sort.sh
 	./scripts/test_sort.sh insertion
-
-# Test engineered
-test-engineered: prep-script
-	@sed -i -e 's/\r$$//' ./scripts/test_sort.sh
-	@chmod +x ./scripts/test_sort.sh
-	./scripts/test_sort.sh engineered
 
 # Test merge
 test-merge: prep-script
@@ -69,6 +58,12 @@ test-quick: prep-script
 	@sed -i -e 's/\r$$//' ./scripts/test_sort.sh
 	@chmod +x ./scripts/test_sort.sh
 	./scripts/test_sort.sh quick
+
+# Test engineered
+test-engineered: prep-script
+	@sed -i -e 's/\r$$//' ./scripts/test_sort.sh
+	@chmod +x ./scripts/test_sort.sh
+	./scripts/test_sort.sh engineered
 
 # Removes carriage return and makes script executable
 prep-script:
