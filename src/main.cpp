@@ -36,16 +36,18 @@ int main(int argc, char* argv[]) {
     // Perform benchmark on the sort
     Timer timer;
 
-    // If no arg passed, use regular sort. Otherwise, use engineered sort with k parameter.
+    // If no arg passed, use regular sort (insertion, merge, or quick)
     if (argc == 1) {
         timer.start();
         sort(list, -1);
         timer.stop();
     } else if (argc == 2) {
+        // If k value is supplied from arg, run engineered sort
         timer.start();
         sort(list, stoi(argv[1]));
         timer.stop();
     } else if (argc > 2 || stoi(argv[1]) > list->size) {
+        // Error checking on arguments passed
         cerr << "Invalid arguments" << endl;
         return 1;
     }
