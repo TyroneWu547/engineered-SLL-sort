@@ -121,9 +121,10 @@ void LinkedList::append(int data) {
     Node* node = new Node(data);
 
     // If linked list is empty
-    if (!this->head) {
+    if (this->head == nullptr) {
         // set head and tail to Node
         this->head = node;
+        this->tail = node;
     } else {
         // otherwise, append node to tail
         pushHead(node);
@@ -142,6 +143,11 @@ Node* LinkedList::popHead() {
     this->head = this->head->next;
     // Detach popped node from list
     pop->next = nullptr;
+
+    // If tail if last node is popped
+    if (this->head->next == nullptr) {
+        this->tail = nullptr;
+    }
 
     return pop;
 }

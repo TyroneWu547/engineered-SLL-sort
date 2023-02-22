@@ -40,9 +40,9 @@ int main() {
     timer.stop();
 
     // Print the sorted list to standard output
-    Node* cursor = (*list).head;
+    Node* cursor = list->head;
     while (cursor) {
-        cout << (*cursor).data << endl;
+        cout << cursor->data << endl;
         cursor = cursor->next;
     }
 

@@ -88,26 +88,6 @@ public:
      * @return false if this node's data is not greater than or equal to other node's data
      */
     bool operator >= (const Node& other) const;
-
-    // /**
-    //  * @brief Defines if this node is NULL or not.
-    //  * 
-    //  * @return true if this node is NULL
-    //  * @return false if this node is not NULL
-    //  */
-    // bool operator == (std::nullptr_t) {
-    //     return *this == nullptr;
-    // }
-
-    // /**
-    //  * @brief Defines if this node is NULL or not.
-    //  * 
-    //  * @return true if this node is not NULL
-    //  * @return false if this node is NULL
-    //  */
-    // bool operator != (std::nullptr_t) {
-    //     return !(*this == nullptr);
-    // }
 };
 
 /**
@@ -142,7 +122,7 @@ public:
     }
 
     /**
-     * @brief Append the new node to the end of the SLL.
+     * @brief Append the new node to the front of the SLL.
      * 
      * @param data the data of the new node
      */
