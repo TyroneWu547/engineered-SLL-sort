@@ -1,108 +1,139 @@
+/**
+ * @file quick.cpp
+ * @author Andrew Sauerbrei
+ *         AJ Bulthuis
+ *         Tyrone Wu
+ * @brief The quicksort implementation.
+ * 
+ */
+
 #include <iostream>
 #include "../include/Sort.h"
 #include "../include/LinkedList.h"
 
 using namespace std;
 
-Node* getPivot(Node* h) {
-    Node* m = h;
-    Node* t = h;
+/**
+ * @brief Gets the pivot using the median of the head, middle, and tail. 
+ * 
+ * @param head the head of the list
+ * @return Node* the pivot
+ */
+Node* getPivot(Node* head) {
+    // First set middle and tail to same node as head
+    Node* middle = head;
+    Node* tail = head;
 
-    while (t->next != nullptr) {
-        t = t->next;
-        if (t->next != nullptr) {
-            m = m->next;
-            t = t->next;
+    // Iterate tail twice as fast as middle to find the middle of the list
+    while (tail->next != nullptr) {
+        tail = tail->next;
+        if (tail->next != nullptr) {
+            middle = middle->next;
+            tail = tail->next;
         }
     }
 
-    if(m->data < t->data && t->data < h->data)
-        return t;
-    else if(m->data < h->data && h->data < t->data)
-        return h;
+    // Return the median value of head, middle, and tail
+    if (middle->data < tail->data && tail->data < head->data)
+        return tail;
+    else if (middle->data < head->data && head->data < tail->data)
+        return head;
     else
-        return m;
+        return middle;
 }
 
-// Node* getPivot(Node* m, Node* t, Node* h){
-//     if(t->next == nullptr || t->next->next == nullptr){
-//         if(m->data < t->data && t->data < h->data)
-//             return t;
-//         else if(m->data < h->data && h->data < t->data)
-//             return h;
-//         else
-//             return m;
-//     } 
-//     return getPivot(m->next, t->next->next, h);
-// }
-
-// Node* getPivot(Node* h){
-//     if(h->next == nullptr || h->next->next == nullptr)
-//         return h;
-//     return getPivot(h->next, h->next->next, h);
-// }
-
-Node* findEnd(Node* h) {
-    Node* t = h;
-    while (t->next != nullptr)
-        t= t->next;
-    return t; 
+/**
+ * @brief Gets the tail of the list.
+ * 
+ * @param head the nead of the list
+ * @return Node* the tail of the list
+ */
+Node* findEnd(Node* head) {
+    // Iterates through the list until it reaches the tail
+    Node* tail = head;
+    while (tail->next != nullptr)
+        tail = tail->next;
+    return tail; 
 }
 
-// Node* combine(Node* l, Node* m, Node* r){
-//     findEnd(m)->next = r;
-//     if (l != nullptr){
-//         findEnd(l)->next = m;
-//         return l;
-//     }
-//     return m;
-
-// }
-
-Node* combine(Node* l, Node* r){
-    if (l != nullptr){
-        findEnd(l)->next = r;
-        return l;
+/**
+ * @brief Combines the left and right sub-list, and returns new head of the combined list.
+ * 
+ * @param left the left sub-list to combine
+ * @param right the right sub-list to combine
+ * @return Node* the head of the combined list
+ */
+Node* combine(Node* left, Node* right) {
+    // If left is not empty, attach the end of left to the front of right
+    if (left != nullptr) {
+        findEnd(left)->next = right;
+        return left;
     }
-    return r;
+    // Otherwise, return the right
+    return right;
 }
 
-Node* quick(Node* h, Node* p){
-    if(h->next != nullptr){
-        Node* l = nullptr;
-        Node* r = nullptr;
-        Node* m = nullptr;
+/**
+ * @brief Performs recursive quicksort on the list with the given pivot and combine the sub-lists. 
+ * 
+ * @param head the head of the list to quicksort on
+ * @param pivot the pivot to use
+ * @return Node* the head of the sorted list
+ */
+Node* quick(Node* head, Node* pivot) {
+    // If list has more than one node
+    if (head->next != nullptr) {
+        // Track left sub-list, middle sub-list, and right sub-list of list
+        Node* left = nullptr;
+        Node* right = nullptr;
+        Node* middle = nullptr;
 
-        Node* t = h;
+        // Move nodes < pivot to left, nodes > pivot to right, and nodes == pivot to middle
+        Node* tail = head;
         Node* hold;
-        do{
-            hold = t->next;
-            if(*t < *p){
-                t->next = l;
-                l = t;
-            } else if(*t > *p) {
-                t->next = r;
-                r = t;
+        do {
+            hold = tail->next;
+            if (*tail < *pivot) {
+                tail->next = left;
+                left = tail;
+            } else if (*tail > *pivot) {
+                tail->next = right;
+                right = tail;
             } else {
-                t->next = m;
-                m = t;   
+                tail->next = middle;
+                middle = tail;   
             } 
-            t = hold;
-        } while (t != nullptr);
+            tail = hold;
+        } while (tail != nullptr);
 
-        if(l != nullptr)
-            l = quick(l, getPivot(l));   
+        // If left is not empty, recursive quicksort on left sub-list
+        if (left != nullptr)
+            left = quick(left, getPivot(left));
 
-        l = combine(l, m); 
+        // Combine left and middle sub-list into left
+        left = combine(left, middle);
 
-        if(r != nullptr)
-            r = quick(r, getPivot(r));
+        // If right is not empty, recursive quicksort on right sub-list
+        if (right != nullptr)
+            right = quick(right, getPivot(right));
 
-        return combine(l, r);
+        // Combine left and right sub-list
+        return combine(left, right);
     }
-    return h;
+
+    return head;
 }
 
+/**
+ * @brief Runs the quick function to perform in-place quicksort.
+ * 
+ * @param list the list to sort
+ */
 void sort(LinkedList* list) {
+    // Base case if list empty
+    if (list->head == nullptr) {
+        return;
+    }
+    // Otherwise, perform quicksort
     list->head = quick(list->head, getPivot(list->head));
 }
