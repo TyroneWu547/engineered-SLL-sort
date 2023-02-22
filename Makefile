@@ -52,6 +52,12 @@ test-insertion: prep-script
 	@chmod +x ./scripts/test_sort.sh
 	./scripts/test_sort.sh insertion
 
+# Test engineered
+test-engineered: prep-script
+	@sed -i -e 's/\r$$//' ./scripts/test_sort.sh
+	@chmod +x ./scripts/test_sort.sh
+	./scripts/test_sort.sh engineered
+
 # Test merge
 test-merge: prep-script
 	@sed -i -e 's/\r$$//' ./scripts/test_sort.sh

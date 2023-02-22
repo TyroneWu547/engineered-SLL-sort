@@ -17,6 +17,7 @@
  * 
  * @param list the list the node is inserting into
  * @param nodeToSort the node to insert into the sorted portion
+ * @return Node* head of the newlt sorted list
  */
 Node* insertIntoSorted(Node* head, Node* nodeToSort) {
     // First check if the nodeToSort should be inserted into the front of the sorted portion
@@ -59,6 +60,7 @@ Node* insertIntoSorted(Node* head, Node* nodeToSort) {
  * @brief Iterates through the unsorted portion of the list and calls insertIntoSorted to add each to the sorted portion of the list.
  * 
  * @param head the list perform insertion sort on
+ * @return Node* head of the newlt sorted list
  */
 Node* insertionSort(Node* head) {
 
@@ -166,6 +168,7 @@ Node* merge(Node* leftHead, Node* rightHead) {
  * @brief Performs recursive merge sort on the list until all nodes are merged. 
  * 
  * @param head the head of the list to merge sort on
+ * @param counter keeps track of when to switch to insertion sort
  * @return Node* the head of the sorted and merged list
  */
 Node* engineeredSort(Node* head, int counter) {
