@@ -77,10 +77,10 @@ Node* quick(Node* h, Node* p){
         Node* hold;
         do{
             hold = t->next;
-            if(t < p){
+            if(*t < *p){
                 t->next = l;
                 l = t;
-            } else if(t > p) {
+            } else if(*t > *p) {
                 t->next = r;
                 r = t;
             } else {
